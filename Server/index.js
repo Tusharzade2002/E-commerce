@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 const app =express();
 dotenv.config();
+app.use(express.json());
 app.use(cors());
-
 
 // connect to mongoDB
 const connectDB  =async()=>{
@@ -22,13 +22,52 @@ app.get("/health",(req,res)=>{
     })
 })
 
+app.post("/signup" ,(req,res)=>{
+    const {name ,email,phoneNo,address,password,repassword} =req.body;
+      
+     if(password !== repassword){
+        return res.status(400).json({
+            success:false,
+            message:"password does not match",
+        })
+     }
+
+     if(!name){
+        return res.status(400).json({
+            success:false,
+            message:"name is required",
+        })
+     }
+
+     if(!email){
+        return res.status(400).json({
+             success:false,
+             message:"email is required",
+        })
+     }
+
+     if(!phoneNo){
+        return res.status(400).json({
+            success:false,
+            message:"Phone number is required",
+        })
+     }
+
+     if(!address){
+        return res.status(400).json({
+            success:false,
+            message:"address is required"
+        })
+     }
+})
+
 app.get("*",(req,res)=>{
     res.status(404).json({
         success:false,
         message:"Route Not Found"
     })
 })
-const PORT=process.env.PORT || 5000 
+const PORT=process.env.PORT || 8000
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`);
     connectDB();
