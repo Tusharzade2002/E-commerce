@@ -1,9 +1,9 @@
-import {model ,schema} from 'mongoose'
+import {model ,Schema} from 'mongoose'
 
-const  productschema = new schema({
+const  productschema = new Schema({
    name:{
         type:String,
-        required:ytrue,
+        required:true,
     },
    shortDescription: {
         type:String,
