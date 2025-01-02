@@ -6,6 +6,7 @@ const app =express();
 dotenv.config();
 app.use(express.json());
 app.use(cors());
+import User from './Models/Users.js'
 
 // connect to mongoDB
 const connectDB  =async()=>{
@@ -22,7 +23,7 @@ app.get("/health",(req,res)=>{
     })
 })
 
-app.post("/signup" ,(req,res)=>{
+app.post("/signup" ,async(req,res)=>{
     const {name ,email,phoneNo,address,password,repassword} =req.body;
       
      if(password !== repassword){
@@ -52,13 +53,35 @@ app.post("/signup" ,(req,res)=>{
             message:"Phone number is required",
         })
      }
-
      if(!address){
         return res.status(400).json({
             success:false,
             message:"address is required"
         })
      }
+   try{
+         const newUser = new User({
+        name,
+        email,
+        phoneNo,
+        address,
+        password,
+        repassword,
+        })
+           const SavedUser = await newUser.save();
+           return res.json({
+            success:true,
+            message:"signup successfully",
+            data:SavedUser
+           })
+    }   
+    catch(error){
+        return res.status(400).json({
+            success:false,
+            message:e.message
+        })
+    }
+
 })
 
 app.get("*",(req,res)=>{

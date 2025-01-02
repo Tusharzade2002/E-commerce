@@ -12,7 +12,7 @@ const orderschema = new Schema({
             productId:{
                 type:Schema.Types.ObjectId,
                 ref:"product",
-                required:true
+                required:true,
             },
             quality:{
                 type:String,
