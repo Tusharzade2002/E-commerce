@@ -2,11 +2,17 @@ import express from 'express'
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+
 const app =express();
 dotenv.config();
 app.use(express.json());
 app.use(cors());
-import User from './Models/Users.js'
+
+import {PostSignup,postLogin}  from './Controller/User.js';
+import { postProduct } from './Controller/Product.js';
+import {jwtVerifyMiddleware} from './MiddleWare/auth.js'
+
+
 
 // connect to mongoDB
 const connectDB  =async()=>{
@@ -23,66 +29,40 @@ app.get("/health",(req,res)=>{
     })
 })
 
-app.post("/signup" ,async(req,res)=>{
-    const {name ,email,phoneNo,address,password,repassword} =req.body;
-      
-     if(password !== repassword){
-        return res.status(400).json({
-            success:false,
-            message:"password does not match",
-        })
-     }
+app.post("/signup" ,PostSignup );
+app.post("/login",postLogin);
+app.post("/products",jwtVerifyMiddleware,postProduct)
+// app.get("/test",(req,res)=>{
+//       const token =req.headers.authorization;
+//       if(!token){
+//         return res.status(401).json({
+//                 success:false,
+//                 message:"unauthorized"
+//         })
+//       }     
 
-     if(!name){
-        return res.status(400).json({
-            success:false,
-            message:"name is required",
-        })
-     }
+//       const tokenvalue=token.split(" ")[1];
 
-     if(!email){
-        return res.status(400).json({
-             success:false,
-             message:"email is required",
-        })
-     }
+//       try{
+//         const decoded =jwt.verify(tokenvalue,process.env.JWT_SECRET);
 
-     if(!phoneNo){
-        return res.status(400).json({
-            success:false,
-            message:"Phone number is required",
-        })
-     }
-     if(!address){
-        return res.status(400).json({
-            success:false,
-            message:"address is required"
-        })
-     }
-   try{
-         const newUser = new User({
-        name,
-        email,
-        phoneNo,
-        address,
-        password,
-        repassword,
-        })
-           const SavedUser = await newUser.save();
-           return res.json({
-            success:true,
-            message:"signup successfully",
-            data:SavedUser
-           })
-    }   
-    catch(error){
-        return res.status(400).json({
-            success:false,
-            message:e.message
-        })
-    }
+//         if(decoded){
+//             res.json({
+//                 success:true,
+//                 message:"Authorized",
+//                 data:decoded
+//             })
+//           }
+//         }catch(error){
+//             res.status(401).json({
+//                 success:false,
+//                 message:"Unauthorized"
+//             })
+//         }
+// })
 
-})
+
+
 
 app.get("*",(req,res)=>{
     res.status(404).json({
@@ -90,7 +70,9 @@ app.get("*",(req,res)=>{
         message:"Route Not Found"
     })
 })
+
 const PORT=process.env.PORT || 8000
+
 app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`);
     connectDB();
