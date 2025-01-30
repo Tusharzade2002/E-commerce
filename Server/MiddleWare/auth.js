@@ -1,4 +1,4 @@
-
+import jwt from 'jsonwebtoken'
 const jwtVerifyMiddleware =async(req,res,next)=>{
     const jwtToken = req?.headers?.authorization?.split(" ")[1];
  
@@ -10,7 +10,7 @@ const jwtVerifyMiddleware =async(req,res,next)=>{
     }
 
     try{
-     const decoded = await jwt.verify(jwtToken,process.env.JWT_SECRET);
+     const decoded = await jwt.verify(jwtToken , process.env.JWT_SECRET);
      req.user =decoded;
      next();
     }catch(error){
@@ -20,5 +20,4 @@ const jwtVerifyMiddleware =async(req,res,next)=>{
      })
     }
  }
-
  export {jwtVerifyMiddleware}
