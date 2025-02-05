@@ -48,7 +48,34 @@
       })
     }
  }
- export {postProduct}
+
+   const getProducts = async (req,res)=>{
+    const {limit,search}=req.query;
+     const Products =await Product.find({
+         name:{
+          $regex:new RegExp(search || ""),
+          $options:"i"
+         },
+         shortDescription:{
+          $regex:new RegExp(search || ""),
+          $options:"i"
+         },
+         longDescription:{
+          $regex:new RegExp(search || ""),
+          $options:"i"
+         }
+        }).limit(parseInt(limit ||10));
+
+
+     res.json({
+      succes:true,
+      data:Products,
+      message:"data fetched successfully"
+     })
+   }
+
+
+ export {postProduct ,getProducts}
 
 //  {
 //   "name":"laptop i5",

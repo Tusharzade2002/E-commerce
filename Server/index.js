@@ -9,9 +9,9 @@ app.use(express.json());
 app.use(cors());
 
 import {PostSignup,postLogin}  from './Controller/User.js';
-import { postProduct } from './Controller/Product.js';
-import {jwtVerifyMiddleware} from './MiddleWare/auth.js'
-
+import { postProduct ,getProducts} from './Controller/Product.js';
+import {jwtVerifyMiddleware,CheckRoleMiddleware} from './MiddleWare/auth.js'
+import PostOrder from './Controller/Order.js';
 
 
 // connect to mongoDB
@@ -31,7 +31,9 @@ app.get("/health",(req,res)=>{
 
 app.post("/signup" ,PostSignup );
 app.post("/login",postLogin);
-app.post("/products",jwtVerifyMiddleware,postProduct)
+app.post("/products",jwtVerifyMiddleware,CheckRoleMiddleware,postProduct)
+app.get("/products",getProducts)
+app.post("/order",jwtVerifyMiddleware,PostOrder)
 // app.get("/test",(req,res)=>{
 //       const token =req.headers.authorization;
 //       if(!token){

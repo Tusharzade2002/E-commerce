@@ -1,5 +1,5 @@
 import {model ,Schema} from 'mongoose'
-import product from './Products';
+
 
 const orderschema = new Schema({
     userId:{ 
@@ -14,7 +14,7 @@ const orderschema = new Schema({
                 ref:"product",
                 required:true,
             },
-            quality:{
+            quantity:{
                 type:String,
                 required:true,
             },
@@ -43,7 +43,6 @@ const orderschema = new Schema({
     PaymentID: {
            type:Schema.Types.ObjectId,
            ref:"Payment",
-           required:true
      },
      status:{
         type:String,
@@ -54,11 +53,11 @@ const orderschema = new Schema({
             status:{
                 type:String,
                 required:true
-            },
-            date:{
-                type:date,
-                default:Date.now,
             }
+            // date:{
+            //     type:date,
+            //     default:Date.now,
+            // }
         }
      ]
 },{timestamps:true})
