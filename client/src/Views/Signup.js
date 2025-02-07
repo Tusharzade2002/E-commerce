@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Input from '../Component/Input'
+import Button from '../Component/Button'
 function Signup() {
        const [SignupData,setSignupData]=useState({
         name:"",
@@ -14,7 +15,7 @@ function Signup() {
   return (
     <div className='bg-zinc-100 min-h-screen flex flex-col items-center  justify-center'>
     <h1 className=''>Signup</h1>
-    <div className='w-[400px] h-[500px] bg-white rounded-2xl shadow-lg hover:shadow-2xl px-4 py-4 my-6 delay-150'>
+    <div className='w-[400px]  bg-white rounded-2xl shadow-lg hover:shadow-2xl px-4 py-2 delay-150'>
       <Input label={"Name"}
        placeholder={"name"}
        val={SignupData.name}
@@ -58,6 +59,12 @@ function Signup() {
         setSignupData({...SignupData,repassword:val})
        }}
       />
+      <div className='flex  justify-center'>
+        <Button label={"Signup"}
+           varient={"primary"}
+           onClick={()=> console.log(SignupData)}
+         />
+      </div>
    </div>
    </div>
   )
