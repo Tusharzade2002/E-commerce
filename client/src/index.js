@@ -5,11 +5,11 @@ import { RouterProvider , createBrowserRouter } from 'react-router-dom';
 import Login from './Views/Login';
 import Signup from './Views/Signup';
 import NotFound from './Views/NotFound';
-
+import Home from './Views/Home';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-router=createBrowserRouter([
+const router=createBrowserRouter([
      {
       path:"/",
       element:<Home />
@@ -28,8 +28,6 @@ router=createBrowserRouter([
      }
 ])
 root.render(
-<> 
    <RouterProvider router={router} />
-</>
 );
 
