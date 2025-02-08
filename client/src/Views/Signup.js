@@ -14,7 +14,7 @@ function Signup() {
 
   return (
     <div className='bg-zinc-100 min-h-screen flex flex-col items-center  justify-center'>
-    <h1 className=''>Signup</h1>
+    <h1 className='text-3xl text-gray-600 mb-3'>Signup</h1>
     <div className='w-[400px]  bg-white rounded-2xl shadow-lg hover:shadow-2xl px-4 py-2 delay-150'>
       <Input label={"Name"}
        placeholder={"name"}
@@ -59,8 +59,12 @@ function Signup() {
         setSignupData({...SignupData,repassword:val})
        }}
       />
-      <div className='flex  justify-center'>
-        <Button label={"Signup"}
+      <div className='flex  justify-around my-2'>
+        <Button label={"Cancel"}
+           varient={"danger"}
+           onClick={()=> console.log(SignupData)}
+         />
+          <Button label={"Signup"}
            varient={"primary"}
            onClick={()=> console.log(SignupData)}
          />

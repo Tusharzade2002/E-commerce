@@ -17,7 +17,7 @@ function Button({label,onClick,varient}) {
   return (
     <button type='button'
       onClick={onClick}
-      className={`px-6 py-2 rounded-full ${BTN_STYLE[varient]}`}
+      className={`px-5 py-1 rounded-full ${BTN_STYLE[varient]}`}
     >
             {label}
     </button>
