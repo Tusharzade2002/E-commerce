@@ -38,6 +38,7 @@ const PostSignup =async(req,res)=>{
             message:"Phone number is required",
         })
      }
+
      if(!address){
         return res.status(400).json({
             success:false,

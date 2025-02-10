@@ -1,9 +1,10 @@
 import  order from '../Models/order.js'
 const PostOrder=async(req,res)=>{
-     console.log(req.user);
+    //  console.log(req.user);
       const {products,DelivaryAddress,phone,PaymentMode}=req.body;
+console.log("product", products);
 
-if(!products  || !DelivaryAddress || !phone || !PaymentMode ){
+if(!products || !DelivaryAddress || !phone || !PaymentMode ){
     return res.status(400).json({
         success:false,
         message:"all fields are required"
@@ -11,9 +12,12 @@ if(!products  || !DelivaryAddress || !phone || !PaymentMode ){
 }
 let Totalbill = 0;
 
-products.forEach(product => {
-    console.log(product);})
-
+  
+ products.forEach((product) => {
+     console.log(product.productId);
+     
+ });
+    
      try{
        
      const neworder = new order({

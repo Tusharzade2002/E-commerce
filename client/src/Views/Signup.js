@@ -1,21 +1,34 @@
 import React, { useState } from 'react'
+import toast ,{Toaster} from 'react-hot-toast'
+import axios from 'axios'
 import Input from '../Component/Input'
 import Button from '../Component/Button'
 function Signup() {
        const [SignupData,setSignupData]=useState({
         name:"",
         email:"",
-        phone:"",
+        phoneNo:"",
         address:"",
         password:"",
         repassword:""
        })
 
-
+             
+       const processSignup=async()=>{
+        try{
+             const response = await axios.post(`http://localhost:8000/signup`,SignupData)
+             console.log(response);
+             toast.success("signup successfully")
+        } catch(err){
+          console.log(err.response);
+          toast.error(err?.response?.data?.message)
+        }
+       }
   return (
-    <div className='bg-zinc-100 min-h-screen flex flex-col items-center  justify-center'>
+    <div className='bg-zinc-100 min-h-screen flex flex-col items-center  justify-center px-5'>
     <h1 className='text-3xl text-gray-600 mb-3'>Signup</h1>
-    <div className='w-[400px]  bg-white rounded-2xl shadow-lg hover:shadow-2xl px-4 py-2 delay-150'>
+    <div className='w-full md:w-[400px] bg-white rounded-2xl shadow-lg hover:shadow-2xl px-6 py-2 delay-150'>
+     
       <Input label={"Name"}
        placeholder={"name"}
        val={SignupData.name}
@@ -31,11 +44,10 @@ function Signup() {
        }}
       />      
       <Input label={"Phone"}
-      text={"number"}
       placeholder={"Phone"}
-      val={SignupData.phone}
+      val={SignupData.phoneNo}
       onChange={(val)=>{
-       setSignupData({...SignupData,phone:val})
+       setSignupData({...SignupData,phoneNo:val})
       }}
      />
            <Input label={"Address"}
@@ -47,6 +59,7 @@ function Signup() {
       />
             <Input label={"Password"}
        placeholder={"Password"}
+       type='password'
        val={SignupData.password}
        onChange={(val)=>{
         setSignupData({...SignupData,password:val})
@@ -54,6 +67,7 @@ function Signup() {
       />
             <Input label={"Re-password"}
        placeholder={"Re-password"}
+       type='password'
        val={SignupData.repassword}
        onChange={(val)=>{
         setSignupData({...SignupData,repassword:val})
@@ -62,14 +76,15 @@ function Signup() {
       <div className='flex  justify-around my-2'>
         <Button label={"Cancel"}
            varient={"danger"}
-           onClick={()=> console.log(SignupData)}
+           onClick={()=> window.location.href = "/"}
          />
           <Button label={"Signup"}
            varient={"primary"}
-           onClick={()=> console.log(SignupData)}
+           onClick={()=> processSignup()}
          />
       </div>
    </div>
+   <Toaster />
    </div>
   )
 }
