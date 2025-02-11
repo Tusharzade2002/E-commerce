@@ -4,7 +4,25 @@ import jwt from 'jsonwebtoken'
 
 const PostSignup =async(req,res)=>{
     const {name ,email,phoneNo,address,password,repassword} =req.body;
-      
+    if(!name){
+        return res.status(400).json({
+            success:false,
+            message:"name is required",
+        })
+     }
+     if(!email){
+        return res.status(400).json({
+             success:false,
+             message:"email is required",
+        })
+     }
+     if(!phoneNo){
+        return res.status(400).json({
+            success:false,
+            message:"Phone number is required",
+        })
+     }
+
      if(!password){
         return res.status(400).json({
             success:false,
@@ -17,28 +35,6 @@ const PostSignup =async(req,res)=>{
             message:"password does not match",
         })
      }
-
-     if(!name){
-        return res.status(400).json({
-            success:false,
-            message:"name is required",
-        })
-     }
-
-     if(!email){
-        return res.status(400).json({
-             success:false,
-             message:"email is required",
-        })
-     }
-
-     if(!phoneNo){
-        return res.status(400).json({
-            success:false,
-            message:"Phone number is required",
-        })
-     }
-
      if(!address){
         return res.status(400).json({
             success:false,

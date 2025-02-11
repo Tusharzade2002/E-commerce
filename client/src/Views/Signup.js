@@ -13,15 +13,28 @@ function Signup() {
         repassword:""
        })
 
+        const [error,setError] = useState("")
              
        const processSignup=async()=>{
+        toast.loading("please wait")
+
         try{
              const response = await axios.post(`http://localhost:8000/signup`,SignupData)
-             console.log(response);
+             toast.dismiss()
              toast.success("signup successfully")
+            //  setSignupData({
+            //   name:"",
+            //   email:"",
+            //   phoneNo:"",
+            //   address:"",
+            //   password:"",
+            //   repassword:""
+            //  })
         } catch(err){
-          console.log(err.response);
+          toast.dismiss()
+          setError(err?.response?.data?.message)
           toast.error(err?.response?.data?.message)
+      
         }
        }
   return (
@@ -34,6 +47,7 @@ function Signup() {
        val={SignupData.name}
        onChange={(val)=>{
         setSignupData({...SignupData,name:val})
+        setError("");
        }}
       />
       <Input label={"Email"}
@@ -41,6 +55,7 @@ function Signup() {
        val={SignupData.email}
        onChange={(val)=>{
         setSignupData({...SignupData,email:val})
+        setError("")
        }}
       />      
       <Input label={"Phone"}
@@ -48,6 +63,7 @@ function Signup() {
       val={SignupData.phoneNo}
       onChange={(val)=>{
        setSignupData({...SignupData,phoneNo:val})
+       setError("")
       }}
      />
            <Input label={"Address"}
@@ -55,6 +71,7 @@ function Signup() {
        val={SignupData.address}
        onChange={(val)=>{
         setSignupData({...SignupData,address:val})
+        setError("")
        }}
       />
             <Input label={"Password"}
@@ -63,6 +80,7 @@ function Signup() {
        val={SignupData.password}
        onChange={(val)=>{
         setSignupData({...SignupData,password:val})
+        setError("")
        }}
       />
             <Input label={"Re-password"}
@@ -71,8 +89,12 @@ function Signup() {
        val={SignupData.repassword}
        onChange={(val)=>{
         setSignupData({...SignupData,repassword:val})
+        setError("")
        }}
       />
+
+      <p className='text-red-500 text-sm mt-2'>{error}</p>
+
       <div className='flex  justify-around my-2'>
         <Button label={"Cancel"}
            varient={"danger"}
