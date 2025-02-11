@@ -30,7 +30,7 @@ const jwtVerifyMiddleware =async(req,res,next)=>{
        console.log(path);
        console.log(Method);
     
-       if(Method==='POST' && path=='/products' && userRole!="Admin"){
+       if(Method==='POST' && path=='/products' && userRole!="admin"){
       return  res.status(403).json({
             success:false,
             message:"you are not authorize to add the products" 

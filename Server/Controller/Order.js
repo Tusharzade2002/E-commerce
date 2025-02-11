@@ -1,8 +1,8 @@
-import  order from '../Models/order.js'
+import  order from '../Models/Orders.js'
 const PostOrder=async(req,res)=>{
     //  console.log(req.user);
       const {products,DelivaryAddress,phone,PaymentMode}=req.body;
-console.log("product", products);
+// console.log("product", products);
 
 if(!products || !DelivaryAddress || !phone || !PaymentMode ){
     return res.status(400).json({
@@ -11,12 +11,34 @@ if(!products || !DelivaryAddress || !phone || !PaymentMode ){
     })
 }
 let Totalbill = 0;
-
+ 
   
  products.forEach((product) => {
+    console.log("product" ,product);
      console.log(product.productId);
-     
+    if(product.price && product.quatity){
+        Totalbill += product.price * product.quatity
+        console.log(Totalbill);
+        
+    }else{
+        return res.status(400).json({
+            success:false,
+            message:"invalid product data"
+        })
+    }
  });
+    //  console.log(product.productId);
+    // if(product.price && product.quatity){
+    //     Totalbill += product.price * product.quatity
+    //     console.log(Totalbill);
+        
+    // }else{
+    //     return res.status(400).json({
+    //         success:false,
+    //         message:"invalid product data"
+    //     })
+    // }
+   
     
      try{
        
