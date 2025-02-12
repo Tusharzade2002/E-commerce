@@ -3,6 +3,7 @@ import toast ,{Toaster} from 'react-hot-toast'
 import axios from 'axios'
 import Input from '../Component/Input'
 import Button from '../Component/Button'
+import {Link}from'react-router-dom'
 function Signup() {
        const [SignupData,setSignupData]=useState({
         name:"",
@@ -21,15 +22,19 @@ function Signup() {
         try{
              const response = await axios.post(`http://localhost:8000/signup`,SignupData)
              toast.dismiss()
-             toast.success("signup successfully")
-            //  setSignupData({
-            //   name:"",
-            //   email:"",
-            //   phoneNo:"",
-            //   address:"",
-            //   password:"",
-            //   repassword:""
-            //  })
+             toast.success("signup successfully,please login")
+             setSignupData({
+              name:"",
+              email:"",
+              phoneNo:"",
+              address:"",
+              password:"",
+              repassword:""
+             })
+
+             setTimeout(()=>{
+                     window.location.href="/login"
+             },3000)
         } catch(err){
           toast.dismiss()
           setError(err?.response?.data?.message)
@@ -94,6 +99,9 @@ function Signup() {
       />
 
       <p className='text-red-500 text-sm mt-2'>{error}</p>
+      <p>
+        Already have an account ? <Link to="/login" className='text-blue-500'>Login</Link>
+      </p>
 
       <div className='flex  justify-around my-2'>
         <Button label={"Cancel"}
