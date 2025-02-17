@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import toast ,{Toaster} from 'react-hot-toast'
 import axios from 'axios'
 import Input from '../Component/Input'
 import Button from '../Component/Button'
 import {Link}from'react-router-dom'
+import { GetCurrentUser } from '../Util/Common'
 function Login() {
        const [LoginData,setLoginData]=useState({
         name:"",
@@ -29,6 +30,8 @@ function Login() {
              })
 
              localStorage.setItem("e-commerce-user-token" , response.data.token)
+             localStorage.setItem("e-commerce-user-details" , response.data.data)
+
      console.log(response);
      
              setTimeout(()=>{
@@ -41,6 +44,19 @@ function Login() {
       
         }
        }
+
+       useEffect(()=>{
+        // check if already loged in 
+            const currentUser =GetCurrentUser();
+            console.log(currentUser);
+            
+            if(!currentUser){
+                        toast.success("You have already loged in ..  Redirecting to dashboard...");
+                        setTimeout(() => {
+                          window.location.href="/dashboard";
+                        }, 3000);
+            }
+       })
   return (
     <div className='bg-zinc-100 min-h-screen flex flex-col items-center  justify-center px-5'>
     <h1 className='text-3xl text-gray-600 mb-3'>Login</h1>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import toast ,{Toaster} from 'react-hot-toast'
 import axios from 'axios'
 import Input from '../Component/Input'
 import Button from '../Component/Button'
 import {Link}from'react-router-dom'
+import { GetCurrentUser } from '../Util/Common'
 function Signup() {
        const [SignupData,setSignupData]=useState({
         name:"",
@@ -42,6 +43,19 @@ function Signup() {
       
         }
        }
+
+       useEffect(()=>{
+        // check if user is 
+        const currentUser =GetCurrentUser();
+        console.log(currentUser);
+        
+        if(!currentUser){
+                    toast.success("You have already sign in ..  Redirecting to dashboard...");
+                    setTimeout(() => {
+                      window.location.href="/dashboard";
+                    }, 3000);
+        }
+   })
   return (
     <div className='bg-zinc-100 min-h-screen flex flex-col items-center  justify-center px-5'>
     <h1 className='text-3xl text-gray-600 mb-3'>Signup</h1>
