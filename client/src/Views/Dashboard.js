@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import {GetCurrentUser} from '../Util/Common'
+import {GetCurrentUser,Logout} from '../Util/Common'
 import {Mail as MainIcon,
   IdCard as IdCardIcon,
-  KeySquare as RoleIcon
+  KeySquare as RoleIcon,
+  LogOut as  LogOutIcon
 } from 'lucide-react'
+
+import toast ,{Toaster} from 'react-hot-toast'
+
+const UseDetailRow =({icon , value})=>{
+  return(
+    <p className='flex items-center mb-4 text-xl'>
+          {icon} <span className='ms-4'>{value}</span>
+    </p>
+  )
+}
 
 function Dashboard() {
   const [user,SetUser]=useState({
@@ -19,13 +30,23 @@ useEffect(()=>{
 },[])
   return (
     <div >
-        <h1 className='text-center my-3 text-2xl'>Dashboard</h1>
-        <div className='bg-white w-[500px] mx-auto p-10 rounded-lg shadow-lg'>
-          <p><IdCardIcon className='inline mx-2'/>{user.name}</p>
-          <p> <MainIcon className='inline mx-2' />{user.email}</p>
-          <p><RoleIcon className='inline mx-2'/>{user.role}</p>
-          
+        <h1 className='text-center text-2xl py-4'>Dashboard</h1>
+        <div className='bg-white w-[500px] mx-auto p-10 rounded-lg shadow-lg mt-10'>
+
+               <UseDetailRow icon={<MainIcon/> } value={user.name} />
+               <UseDetailRow icon={<IdCardIcon/> } value={user.email} />
+               <UseDetailRow icon={<RoleIcon/> } value={user.role} />
+
+           <button type='button' className='bg-red-500 p-1 rounded-full px-3 m-auto block' 
+            onClick={()=>{
+              toast.success("Logout successfully..")
+              Logout()
+            }}
+           > Logout 
+           <LogOutIcon  className='inline mx-2'/>
+           </button>
         </div>
+        <Toaster/>
     </div>
   )
 }

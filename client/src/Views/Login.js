@@ -48,9 +48,8 @@ function Login() {
        useEffect(()=>{
         // check if already loged in 
             const currentUser =GetCurrentUser();
-            console.log(currentUser);
-            
-            if(!currentUser){
+          
+            if(currentUser){
                         toast.success("You have already loged in ..  Redirecting to dashboard...");
                         setTimeout(() => {
                           window.location.href="/dashboard";

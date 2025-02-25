@@ -22,7 +22,7 @@ return JSON.parse(User)
      localStorage.clear();
 
      setTimeout(()=>{
-              window.localStorage.href="/login"
+              window.location.href="/login"
      },[])
 
 
