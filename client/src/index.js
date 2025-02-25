@@ -6,6 +6,7 @@ import Login from './Views/Login';
 import Signup from './Views/Signup';
 import NotFound from './Views/NotFound';
 import Home from './Views/Home';
+import Dashboard from './Views/Dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,6 +26,10 @@ const router=createBrowserRouter([
      {
       path:"*",
       element:<NotFound/>
+     },
+     {
+      path:"/dashboard",
+      element:<Dashboard/>
      }
 ])
 root.render(

@@ -30,7 +30,7 @@ function Login() {
              })
 
              localStorage.setItem("e-commerce-user-token" , response.data.token)
-             localStorage.setItem("e-commerce-user-details" , response.data.data)
+             localStorage.setItem("e-commerce-user-details" ,JSON.stringify(response.data.data))
 
      console.log(response);
      
