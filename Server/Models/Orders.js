@@ -5,14 +5,14 @@ const orderschema = new Schema({
     userId:{ 
         type:Schema.Types.ObjectId,
         ref :'user',
-        required:true,   
+       required:true,   
      },
      products:[
         {
             productId:{
                 type:Schema.Types.ObjectId,
                 ref:"product",
-                required:true,
+               required:true,
             },
             quantity:{
                 type:String,
@@ -26,8 +26,7 @@ const orderschema = new Schema({
      ],
      totalbill:{
                 type:String,
-                required:true,
-     },
+             },
     DelivaryAddress: {
                 type:String,
                 required:true
@@ -61,5 +60,5 @@ const orderschema = new Schema({
         }
      ]
 },{timestamps:true})
-const order = model("order" ,orderschema);
-export default order
+const Order = model("order" ,orderschema);
+export default Order

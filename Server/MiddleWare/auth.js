@@ -9,10 +9,13 @@ const jwtVerifyMiddleware =async(req,res,next)=>{
          message:"token is missing"
      })
     }
+   
+    
 
     try{
      const decoded = await jwt.verify(jwtToken , process.env.JWT_SECRET);
      req.user =decoded;
+     console.log(decoded);
      next();
     }catch(error){
       res.status(400).json({
@@ -26,11 +29,11 @@ const jwtVerifyMiddleware =async(req,res,next)=>{
        const userRole =req?.user?.role;
        const Method =req.method;
        const path = req.path;
-       console.log(userRole);
-       console.log(path);
-       console.log(Method);
+    //    console.log(userRole);
+    //    console.log(path);
+    //    console.log(Method);
     
-       if(Method==='POST' && path=='/products' && userRole!="admin"){
+       if(Method==='POST' && path==='/products' && userRole!=="admin"){
       return  res.status(403).json({
             success:false,
             message:"you are not authorize to add the products" 

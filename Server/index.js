@@ -11,7 +11,7 @@ app.use(cors());
 import {PostSignup,postLogin}  from './Controller/User.js';
 import { postProduct ,getProducts} from './Controller/Product.js';
 import {jwtVerifyMiddleware,CheckRoleMiddleware} from './MiddleWare/auth.js'
-import PostOrder from './Controller/Order.js';
+import {PostOrder , putOrder} from './Controller/Order.js';
 
 
 // connect to mongoDB
@@ -34,6 +34,7 @@ app.post("/login",postLogin);
 app.post("/products",jwtVerifyMiddleware,CheckRoleMiddleware,postProduct)
 app.get("/products",getProducts)
 app.post("/order",jwtVerifyMiddleware,PostOrder)
+app.put("/order/:id",jwtVerifyMiddleware,putOrder)
 // app.get("/test",(req,res)=>{
 //       const token =req.headers.authorization;
 //       if(!token){
