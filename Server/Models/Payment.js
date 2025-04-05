@@ -1,4 +1,4 @@
-import {Model, model,Schema}from 'mongoose'
+import {model,Schema}from 'mongoose'
 
 const PaymentSchema=new Schema({
    PaymentMode: {
@@ -18,5 +18,5 @@ const PaymentSchema=new Schema({
         default:"pending"
     }
 },{timestamps:true})
-const Payment =Model("Payment" ,PaymentSchema);
+const Payment = model("Payment" ,PaymentSchema);
 export default Payment;

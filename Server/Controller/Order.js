@@ -1,5 +1,4 @@
 import  Order from '../Models/Orders.js'
-import User from '../Models/Users.js';
 const PostOrder = async(req,res)=>{
       const {products,DelivaryAddress,phone,PaymentMode}=req.body;
      

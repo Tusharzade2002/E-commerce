@@ -27,6 +27,12 @@ useEffect(()=>{
  if(user){
   SetUser(user)
  }
+ else{
+  toast.error("please login to access this page");
+  setTimeout(() => {
+     window.location.href="/login"
+  }, 3000);
+ }
 },[])
   return (
     <div >
