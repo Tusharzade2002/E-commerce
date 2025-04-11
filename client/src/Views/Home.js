@@ -11,12 +11,13 @@ try{
       const response=await axios.get(`${process.env.REACT_APP_API_URL}/products`);
       console.log(response.data.data)
       setproducts(response.data.data)
+      console.log(response.data);
     }catch(error){
       toast.error(error.response.data.message)
     }
   }
     useEffect(()=>{
-      loadproducts()
+      loadproducts();
     },[])
   return (
     <div>

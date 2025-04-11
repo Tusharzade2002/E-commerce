@@ -11,7 +11,7 @@
         tags
       }=req.body
 
-      const ManditoryFields =["name","shortDescription","longDescription","Price","category","images",];
+      const ManditoryFields =["name","shortDescription","longDescription","currentPrice","Price","category","images",];
 
       for(const fields of ManditoryFields){
             if(!req.body[fields]){
