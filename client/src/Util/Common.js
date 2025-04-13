@@ -6,9 +6,7 @@
         return null;
     }
 return JSON.parse(User)    
-
  }
-
  const GetjwtToken=()=>{
 
     const token = localStorage.getItem("e-commerce-user-token");
@@ -23,8 +21,6 @@ return JSON.parse(User)
 
      setTimeout(()=>{
               window.location.href="/login"
-     },[])
-
-
+     },[3000])
  }
  export{GetCurrentUser,GetjwtToken,Logout}

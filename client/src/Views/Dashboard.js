@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import {GetCurrentUser,Logout} from '../Util/Common'
+import {Link} from 'react-router-dom'
 import {Mail as MainIcon,
   IdCard as IdCardIcon,
+  LogOut as  LogOutIcon,
   KeySquare as RoleIcon,
-  LogOut as  LogOutIcon
+  Truck as TruckIcon,
 } from 'lucide-react'
 
 import toast ,{Toaster} from 'react-hot-toast'
@@ -38,6 +40,31 @@ useEffect(()=>{
     <div >
         <h1 className='text-center text-2xl py-4'>Dashboard</h1>
         <div className='bg-white w-[500px] mx-auto p-10 rounded-lg shadow-lg mt-10'>
+        <div className="flex mb-10">
+          <Link
+            to="/user/orders"
+            className="block text-center text-md mx-1 bg-blue-100 p-2"
+          >
+            <TruckIcon className="mx-auto inline" size={24} />
+            <span className="ms-2">My Orders</span>
+          </Link>
+
+          <Link
+            to="/orders"
+            className="block text-center text-md mx-1 bg-blue-100 p-2"
+          >
+            <TruckIcon className="mx-auto inline" size={24} />
+            <span className="ms-2">My Orders</span>
+          </Link>
+
+          <Link
+            to="/orders"
+            className="block text-center text-md mx-1 bg-blue-100 p-2"
+          >
+            <TruckIcon className="mx-auto inline" size={24} />
+            <span className="ms-2">My Orders</span>
+          </Link>
+        </div>
 
                <UseDetailRow icon={<MainIcon/> } value={user.name} />
                <UseDetailRow icon={<IdCardIcon/> } value={user.email} />

@@ -9,9 +9,9 @@ function Home() {
     const loadproducts=async()=>{
 try{ 
       const response=await axios.get(`${process.env.REACT_APP_API_URL}/products`);
-      console.log(response.data.data)
+      // console.log(response.data.data)
       setproducts(response.data.data)
-      console.log(response.data);
+      // console.log(response.data);
     }catch(error){
       toast.error(error.response.data.message)
     }
@@ -21,7 +21,6 @@ try{
     },[])
   return (
     <div>
-      Home
       <div className='flex flex-wrap justify-center'>
       {products.map((product)=>{
         return (<Productcard key={product._id} {...product}/>)

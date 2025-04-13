@@ -4,14 +4,14 @@
         name,
         shortDescription,
         longDescription,
-        Price,
+        price,
         currentPrice,
         category,
         images,
         tags
       }=req.body
 
-      const ManditoryFields =["name","shortDescription","longDescription","currentPrice","Price","category","images",];
+      const ManditoryFields =["name","shortDescription","longDescription","currentPrice","price","category","images",];
 
       for(const fields of ManditoryFields){
             if(!req.body[fields]){
@@ -27,7 +27,7 @@
                    name,
                    shortDescription,
                    longDescription,
-                   Price,
+                   price,
                    currentPrice,
                    category,
                    images,
