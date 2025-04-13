@@ -13,16 +13,16 @@ if(!products || !DelivaryAddress || !phone || !PaymentMode ){
 }
 let Totalbill = 0;
  
- products.forEach((product) => {
-        Totalbill += product.price * product.quatity
-        })
+//  products.forEach((product) => {
+//         Totalbill += product.price * product.quatity
+//         })
     
      try{
        
      const neworder = new Order({
         userId: req.user.id,
         products,
-            Totalbill,
+            // Totalbill,
             DelivaryAddress,
             phone,
             PaymentMode,

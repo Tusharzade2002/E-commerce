@@ -78,7 +78,7 @@ function Productcard({
         {tags.map((tag,item) => {
          
           return (
-            <span className={`${getBackgroundColor(item)} text-white  font-bold px-2 py-1 text-xs rounded-full`}>
+            <span className={`${getBackgroundColor(item)} text-white font-bold px-2 py-1 text-xs rounded-full`}>
               {tag}
             </span>
           );
@@ -88,8 +88,7 @@ function Productcard({
         <h1 className="text-xl font-bold px-1">{shortText(name, 30)}</h1>
         <h1 className="text-sm mt-1">{shortText(shortDescription, 100)}</h1>
         <p className="mt-2">
-          ₹<del>{price}</del>
-          <span className="ms-2 font-bold">{currentPrice}</span>
+          ₹<span className="ms-1 me-2 font-bold">{currentPrice}</span><del>₹ {price}</del>
         </p>
         <div className="flex justify-center items-center">
           <MinusIcon
