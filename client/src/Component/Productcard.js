@@ -1,78 +1,117 @@
-import React, {  useState } from 'react'
+import React, { useState } from "react";
 
 import {
   ChevronLeft as LeftArrow,
+  Minus as MinusIcon,
+  Plus as PlusIcon,
   ChevronRight as RightArrow,
 } from "lucide-react";
-function Productcard({name,tags,currentPrice,Price,images,shortDescription}) {
-
-  console.log(currentPrice);
+import Button from "./Button";
+import toast, { Toaster } from "react-hot-toast";
+function Productcard({
+  name,
+  currentPrice,
+  price,
+  images,
+  shortDescription,
+  tags,
+}) {
   
- const shortText = (text, maxLength = 1) => {
-  if (!text) {
-    return " ";
-  }
-  if(text.length <= maxLength) {
-    return text;
-  }
-  let shortText = text.substring(0, maxLength - 3);
 
-  shortText += "...";
+  const shortText = (text, maxLength = 1) => {
+    if (!text) {
+      return " ";
+    }
+    if (text.length <= maxLength) {
+      return text;
+    }
+    let shortText = text.substring(0, maxLength - 3);
 
-  return shortText;
-};
-         const [currentImage ,setCurrentImage]=useState([1])
-  const handleleft=()=>{
-              const currentindex=images.indexOf(currentImage);
-              const newIndex=currentindex > 0 ? currentindex-1 : images.length-1;
-              console.log(newIndex)
-              setCurrentImage(images[newIndex]);
-  }
-  const handleright=()=>{
-    const currentindex=images.indexOf(currentImage);
-    const newIndex= currentImage < images.length-1 ? currentindex + 1  : 0;
-    console.log(newIndex)
+    shortText += "...";
+
+    return shortText;
+  };
+  const [currentImage, setCurrentImage] = useState(images[0]);
+  const handleleft = () => {
+    const currentindex = images.indexOf(currentImage);
+    const newIndex = currentindex > 0 ? currentindex - 1 : images.length-1;
+    console.log(newIndex);
     setCurrentImage(images[newIndex]);
-}
+  };
+  const handleright = () => {
+    const currentIndex = images.indexOf(currentImage);
+    const newIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+    setCurrentImage(images[newIndex]);
+
+  };
+  const getBackgroundColor = (value) => {
+    if (value = "New launches") return 'bg-red-300';
+    if(value = "Bestseller") return 'bg-teal-300';
+  };
+
+   const handleAddtocart=()=>{
+              toast.success("Product added to cart")
+   }
+
+  const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden py-7  p-5 m-5 relative max-w-[270px] ">
-     
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden py-3 px-3  m-5 relative max-w-[270px] ">
+        <div className="relative h-40">
         <LeftArrow
-          size={54}
-          className="absolute top-16 left-0 cursor-pointer p-0 m-0"
-         onClick={handleleft}
+          size={64}
+          className="absolute top-1/3 -left-4 cursor-pointer"
+          onClick={handleleft}
         />
-        <div className='flex justify-center bg-black w-50 my-2 mx-2 '>
         <img
           src={currentImage}
-          alt={name}
-          className=" w-[230px] object-contain object-center"
+          alt="product"
+          className="w-full h-40 object-contain object-center"
         />
-        </div>
         <RightArrow
-          size={54}
-          className="absolute top-16 right-0 cursor-pointer"
-         onClick={handleright}
+          size={64}
+          className="absolute top-1/3 -right-4 cursor-pointer"
+          onClick={handleright}
         />
-        <p>
-        {tags.map((tag) => {
+      </div>
+      <p className="absolute top-2 right-4">
+        {tags.map((tag,item) => {
+         
           return (
-            <span className="bg-gray-200 text-gray-500 px-3 py-1 text-xs rounded-full mr-2">
+            <span className={`${getBackgroundColor(item)} text-white  font-bold px-2 py-1 text-xs rounded-full`}>
               {tag}
             </span>
           );
         })}
       </p>
-      <div className='px-3'>
-        <h1 className='text-2xl font-bold'>{shortText(name,50)}</h1>
-        <h1 className='text-sm'>{shortText(shortDescription,150)}</h1>
-        <p className=''>
-          ₹<del>{Price}</del><span className='ms-2 font-bold'>{currentPrice}</span>
+      <div className="my-3">
+        <h1 className="text-xl font-bold px-1">{shortText(name, 30)}</h1>
+        <h1 className="text-sm mt-1">{shortText(shortDescription, 100)}</h1>
+        <p className="mt-2">
+          ₹<del>{price}</del>
+          <span className="ms-2 font-bold">{currentPrice}</span>
         </p>
+        <div className="flex justify-center items-center">
+          <MinusIcon
+            className="cursor-pointer"
+            onClick={() => setQuantity(quantity - 1)}
+          />
+          <span className="mx-2 text-xl">{quantity}</span>
+          <PlusIcon
+            className="cursor-pointer"
+            onClick={() => setQuantity(quantity + 1)}
+          />
+        </div>
+        <div className="flex justify-center mt-5">
+        <Button label={"Add To Cart"}
+           varient={"primary"}
+           onClick={handleAddtocart}
+         />
       </div>
       </div>
-  )
+      <Toaster/>
+    </div>
+  );
 }
 
-export default Productcard
+export default Productcard;
