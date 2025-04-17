@@ -6,7 +6,9 @@ import Login from './Views/Login';
 import Signup from './Views/Signup';
 import NotFound from './Views/NotFound';
 import Home from './Views/Home';
+import Cart from './Views/Cart'
 import Dashboard from './Views/Dashboard';
+import UserOrders from './Views/UserOrders';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -27,6 +29,14 @@ const router=createBrowserRouter([
       path:"*",
       element:<NotFound/>
      },
+     {
+      path: "/user/cart",
+      element: <Cart />
+     },
+     {
+      path: "/user/orders",
+      element: <UserOrders />,
+    },
      {
       path:"/dashboard",
       element:<Dashboard/>

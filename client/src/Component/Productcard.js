@@ -9,6 +9,7 @@ import {
 import Button from "./Button";
 import toast, { Toaster } from "react-hot-toast";
 function Productcard({
+  id,
   name,
   currentPrice,
   price,
@@ -50,6 +51,30 @@ function Productcard({
   };
 
    const handleAddtocart=()=>{
+            const cart=JSON.parse(localStorage.getItem("cart") || "[]");
+             const product ={
+              productId:id,
+              name:name,
+              image:currentImage,
+              quantity:quantity,
+              price:currentPrice,
+             };
+
+             let exitingProductIndex=-1;
+
+             cart.forEach((item,index) => {
+                     if(item.productId === id){
+                              exitingProductIndex =index
+                     }
+             });
+
+             if(exitingProductIndex>-1){
+              cart[exitingProductIndex].quantity = quantity;
+             }else{
+              cart.push(product);
+             }
+             
+              localStorage.setItem("cart",JSON.stringify(cart))
               toast.success("Product added to cart")
    }
 

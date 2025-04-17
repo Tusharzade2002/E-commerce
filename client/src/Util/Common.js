@@ -1,4 +1,5 @@
- 
+import axios from "axios";
+
  const GetCurrentUser=()=>{
     const User=localStorage.getItem("e-commerce-user-details");
 
@@ -23,4 +24,21 @@ return JSON.parse(User)
               window.location.href="/login"
      },[3000])
  }
- export{GetCurrentUser,GetjwtToken,Logout}
+
+ const getReadableTimestamp = (date) => {
+    const dateObj = new Date(date);
+  
+    const datePart = `${dateObj.getDate()}/${
+      dateObj.getMonth() + 1
+    }/${dateObj.getFullYear()}`;
+    const timePart = `${dateObj.getHours()}:${dateObj.getMinutes()}`;
+    const amOrPm = dateObj.getHours() >= 12 ? "PM" : "AM";
+  
+    return `${datePart} ${timePart} ${amOrPm}`;
+  };
+  const api = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+    withCredentials: true,
+  });
+  
+ export{GetCurrentUser,GetjwtToken,Logout,getReadableTimestamp,api}

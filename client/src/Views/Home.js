@@ -22,20 +22,13 @@ try{
     },[search])
   return (
     <div>
-         <img
+      
+      
+      <img
         src={ImgHeader}
         alt="header"
         className="h-96 object-cover object-center block mx-auto"
       />
-      <div className="flex justify-center py-10">
-        <input
-          type="text"
-          placeholder="Search products"
-          className="w-2/3 p-2 border border-gray-300 rounded-md text-2xl active:outline-none focus:outline-none"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
       <div className='flex flex-wrap justify-center'>
       {products.map((product)=>{
         return (<Productcard key={product._id} {...product}/>)
