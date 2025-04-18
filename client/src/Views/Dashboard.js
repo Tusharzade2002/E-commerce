@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {GetCurrentUser,Logout} from '../Util/Common'
 import {Link} from 'react-router-dom'
+import { ShoppingCart } from "lucide-react";
+
 import {Mail as MainIcon,
   IdCard as IdCardIcon,
   LogOut as  LogOutIcon,
@@ -36,6 +38,7 @@ useEffect(()=>{
   }, 3000);
  }
 },[])
+
   return (
     <div >
         <h1 className='text-center text-2xl py-4'>Dashboard</h1>
@@ -50,19 +53,19 @@ useEffect(()=>{
           </Link>
 
           <Link
-            to="/orders"
+            to="/"
             className="block text-center text-md mx-1 bg-blue-100 p-2"
           >
             <TruckIcon className="mx-auto inline" size={24} />
-            <span className="ms-2">My Orders</span>
+            <span className="ms-2">Products</span>
           </Link>
 
           <Link
-            to="/orders"
+            to="/user/cart"
             className="block text-center text-md mx-1 bg-blue-100 p-2"
           >
-            <TruckIcon className="mx-auto inline" size={24} />
-            <span className="ms-2">My Orders</span>
+            <ShoppingCart  className="mx-auto inline" size={24} />
+            <span className="ms-2">Cart</span>
           </Link>
         </div>
 

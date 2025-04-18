@@ -81,7 +81,7 @@ function Productcard({
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden py-3 px-3  m-5 relative max-w-[270px] ">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden py-3 px-3  m-5 relative max-w-[270px] z-1">
         <div className="relative h-40">
         <LeftArrow
           size={64}
