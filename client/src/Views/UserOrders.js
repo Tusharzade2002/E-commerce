@@ -14,7 +14,7 @@ function UserOrders() {
     }
 
     try {
-      const response = await api.get(`/orders/user/${user.id}`);
+      const response = await api.get(`e-commerce-project-sooty-tau.vercel.app/orders/user/${user.id}`);
 
       setOrders(response?.data?.data);
     } catch (error) {
