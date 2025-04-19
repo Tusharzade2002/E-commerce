@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { CircleUserRound,ShoppingCart } from "lucide-react";
 import Productcard from "../Component/Productcard";
-import ImgHeader from "../Assets/Ecommerce checkout laptop-rafiki.png";
-import Carticon from "../Assets/shopping-cart.png";
 import { Link } from "react-router-dom";
 import ShowProduts from "./ShowProduts";
 function Home() {
@@ -90,7 +88,7 @@ function Home() {
       <img
         src={images[currentIndex]}
         alt="header"
-        className="w-full h-96 object-contain object-center block mx-auto"
+        className="w-full h-[250px] object-contain object-center block mx-auto"
       />
       </div>
       <div className="flex flex-wrap justify-center">

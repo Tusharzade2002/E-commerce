@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import {
-  ChevronLeft as LeftArrow,
+  ChevronLeft ,
   Minus as MinusIcon,
   Plus as PlusIcon,
   ChevronRight as RightArrow,
@@ -83,7 +83,8 @@ function Productcard({
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden py-3 px-3  m-5 relative max-w-[270px] z-1">
         <div className="relative h-40">
-        <LeftArrow
+        <ChevronLeft
+         width={64}
           size={64}
           className="absolute top-1/3 -left-4 cursor-pointer"
           onClick={handleleft}
