@@ -4,12 +4,12 @@ import React from "react";
 import { getReadableTimestamp } from "../Util/Common.js";
 
 function OrderCard({ order, onClick }) {
-  const { _id, status, products, createdAt, totalBill, deliveryAddress } =
+  const { id, status, products, createdAt, totalBill, deliveryAddress } =
     order;
   return (
     <div className="border p-4 m-4 bg-white relative rounded-md" onClick={onClick}>
       <p>
-        Order ID: {_id}, Ordered On: {getReadableTimestamp(createdAt)}
+        Order ID: {id}, Ordered On: {getReadableTimestamp(createdAt)}
       </p>
       <p className="text-lg font-bold mt-3">
         {products.map((product) => product.productId.name).join(", ")}

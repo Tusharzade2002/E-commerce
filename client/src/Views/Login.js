@@ -21,7 +21,7 @@ function Login() {
         toast.loading("please wait")
 
         try{
-             const response = await axios.post(`e-commerce-project-sooty-tau.vercel.app/login`,LoginData)
+             const response = await axios.post(`http://localhost:8000/login`,LoginData)
              toast.dismiss()
              toast.success("Login successfully")
              setLoginData({

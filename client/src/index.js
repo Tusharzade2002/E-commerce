@@ -9,6 +9,7 @@ import Home from './Views/Home';
 import Cart from './Views/Cart'
 import Dashboard from './Views/Dashboard';
 import UserOrders from './Views/UserOrders';
+import Addproducts from './Views/Addproducts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -40,6 +41,10 @@ const router=createBrowserRouter([
      {
       path:"/dashboard",
       element:<Dashboard/>
+     },
+     {
+      path:"/dashboard/addproducts",
+      element:<Addproducts/>
      }
 ])
 root.render(

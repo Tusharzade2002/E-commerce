@@ -11,13 +11,15 @@ function Home() {
   const loadproducts = async () => {
     try {
       const response = await axios.get(
-        `e-commerce-project-sooty-tau.vercel.app/products?limit=100&search=${search}`
+        `http://localhost:8000/products`
       );
       // console.log(response.data.data)
       setproducts(response.data.data);
       // console.log(response.data);
     } catch (error) {
-      toast.error(error.response.data.message);
+     console.log(error);
+     
+      
     }
   };
   useEffect(() => {
