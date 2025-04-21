@@ -17,7 +17,7 @@ import {postpayment} from './Controller/payment.js'
 
 // connect to mongoDB
 const connectDB  =async()=>{
-    const conn=await mongoose.connect(process.env.MONGO_URl);
+    const conn=await mongoose.connect("mongodb+srv://Tusharzade2002:Tusharzade123@icp8.nowv9.mongodb.net/e-commerce");
     if(conn){
         console.log("MongoDB is connected successfully");
     }

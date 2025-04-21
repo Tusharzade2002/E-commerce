@@ -11,7 +11,7 @@ function Home() {
   const loadproducts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/products`
+        `https://e-commerce-project-sooty-tau.vercel.app/products?limit=100&search=${search}`
       );
       // console.log(response.data.data)
       setproducts(response.data.data);

@@ -17,7 +17,7 @@ function Productcard({
   shortDescription,
   tags,
 }) {
-  
+  const [quantity, setQuantity] = useState(1);
 
   const shortText = (text, maxLength = 1) => {
     if (!text) {
@@ -45,40 +45,37 @@ function Productcard({
     setCurrentImage(images[newIndex]);
 
   };
-  const getBackgroundColor = (value) => {
-    if (value = "New launches") return 'bg-red-300';
-    if(value = "Bestseller") return 'bg-teal-300';
-  };
+
 
    const handleAddtocart=()=>{
-            const cart=JSON.parse(localStorage.getItem("cart") || "[]");
-             const product ={
-              productId:id,
-              name:name,
-              image:currentImage,
-              quantity:quantity,
-              price:currentPrice,
-             };
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-             let exitingProductIndex=-1;
+    const product = {
+      productId: id,
+      name: name,
+      image: currentImage,
+      quantity: quantity,
+      price: currentPrice,
+    };
 
-             cart.forEach((item,index) => {
-                     if(item.productId === id){
-                              exitingProductIndex =index
-                     }
-             });
+    let exitingProductIndex = -1;
 
-             if(exitingProductIndex>-1){
-              cart[exitingProductIndex].quantity = quantity;
-             }else{
-              cart.push(product);
-             }
-             
-              localStorage.setItem("cart",JSON.stringify(cart))
-              toast.success("Product added to cart")
+    cart.forEach((item, index) => {
+      if (item.productId === id) {
+        exitingProductIndex = index;
+      }
+    });
+  
+    if (exitingProductIndex >-1) {
+      cart[exitingProductIndex].quantity = quantity;
+    } else {
+      cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+    toast.success("Product added to cart");
    }
 
-  const [quantity, setQuantity] = useState(1);
+ 
 
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden py-3 px-3  m-5 relative max-w-[270px] z-1">
@@ -101,14 +98,14 @@ function Productcard({
         />
       </div>
       <p className="absolute top-2 right-4">
-        {tags.map((tag,item) => {
-         
-          return (
-            <span className={`${getBackgroundColor(item)} text-white font-bold px-2 py-1 text-xs rounded-full`}>
-              {tag}
-            </span>
-          );
-        })}
+        
+    
+  {!tags || tags.trim() === "" 
+    ? "" 
+    :<div className="text-white bg-teal-500 font-bold px-2 py-1 text-sm rounded-full">{tags}</div> 
+  }
+
+      
       </p>
       <div className="my-3">
         <h1 className="text-xl font-bold px-1">{shortText(name, 30)}</h1>

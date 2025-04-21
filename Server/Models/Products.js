@@ -29,7 +29,7 @@ const  productschema = new Schema({
         required:true,
     },
     tags:{
-          type:[String],
+          type:String,
     }
 },)
 const Product =model('product',productschema);
