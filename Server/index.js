@@ -30,13 +30,13 @@ app.get("/health",(req,res)=>{
     })
 })
 
-app.post("/api/v1/signup" , PostSignup );
-app.post("/api/v1/login", postLogin);
-app.post("/api/v1/products",jwtVerifyMiddleware,CheckRoleMiddleware,postProduct)
-app.get("/api/v1/products",getProducts)
-app.post("/api/v1/order",jwtVerifyMiddleware,PostOrder)
-app.put("/api/v1/order/:id",jwtVerifyMiddleware,putOrder)
-app.post("/api/v1/payment",postpayment)
+app.post("/signup" , PostSignup );
+app.post("/login", postLogin);
+app.post("/products",jwtVerifyMiddleware,CheckRoleMiddleware,postProduct)
+app.get("/products",getProducts)
+app.post("/order",jwtVerifyMiddleware,PostOrder)
+app.put("/order/:id",jwtVerifyMiddleware,putOrder)
+app.post("/payment",postpayment)
 // app.get("/test",(req,res)=>{
 //       const token =req.headers.authorization;
 //       if(!token){
