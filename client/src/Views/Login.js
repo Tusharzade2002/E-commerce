@@ -21,7 +21,7 @@ function Login() {
         toast.loading("please wait")
 
         try{
-             const response = await axios.post(`http://localhost:8000/login`,LoginData)
+             const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`,LoginData)
              toast.dismiss()
              toast.success("Login successfully")
              setLoginData({

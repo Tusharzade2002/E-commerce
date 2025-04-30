@@ -21,7 +21,7 @@ function Signup() {
         toast.loading("please wait")
 
         try{
-             const response = await axios.post(`http://localhost:8000/signup`,SignupData)
+             const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`,SignupData)
              toast.dismiss()
              toast.success("signup successfully,please login")
              setSignupData({
