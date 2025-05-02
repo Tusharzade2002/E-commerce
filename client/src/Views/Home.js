@@ -40,6 +40,12 @@ function Home() {
     return () => clearInterval(interval);
   }, [images.length]);
 
+   const [isopen,setisopen]=useState(false);
+
+   const handleopen=()=>{
+       setisopen(!isopen)
+   }
+
 
   return (
  
@@ -75,10 +81,21 @@ function Home() {
         <ShoppingCart />
       </button>
       </Link>
-      <Link to="/dashboard">
-      <button class="text-white">
+      {
+        isopen && (
+                 <div className="bg-white flex flex-col absolute right-[35px] top-[50px] rounded-md me-6">
+                   <Link to="/login" className="text-center text-xl px-5 m-1 hover:text-purple-700"> <button>Login</button></Link>
+                   <hr></hr> 
+                   <Link to="/signup" className="text-center text-xl px-5 m-1 hover:text-purple-700"> <button>Registration</button></Link> 
+                 </div>
+        )
+      }
+      <Link to="">
+     
+      <button class="text-white" onClick={handleopen}>
         <CircleUserRound />
       </button>
+      
       </Link>
     </div>
     

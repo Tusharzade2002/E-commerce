@@ -49,12 +49,12 @@ function Signup() {
         const currentUser =GetCurrentUser();
         console.log(currentUser);
         
-        // if(!currentUser){
-        //             toast.success("You have already sign in ..  Redirecting to dashboard...");
-        //             setTimeout(() => {
-        //               window.location.href="/dashboard";
-        //             }, 3000);
-        // }
+        if(currentUser){
+                    toast.success("You have already sign in ..  Redirecting to dashboard...");
+                    setTimeout(() => {
+                      window.location.href="/dashboard";
+                    }, 3000);
+        }
    })
   return (
     <div className='bg-zinc-100 min-h-screen flex flex-col items-center  justify-center px-5'>
