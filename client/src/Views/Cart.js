@@ -109,9 +109,53 @@ function Cart() {
   };
 
   const placeOrder = async () => {
+    const orderBody={
+      "products":cart.map((product)=>({
+        "productId":product.productId,
+        "quantity":product.quantity,
+        "price":product.price,
+      })),
+        "deliveryAddress": address,
+      "paymentMode": paymentMode,
+      "phone": phone,
+    }
+ const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}/orders`,
+      orderBody,
+      {
+        headers: {
+          Authorization: getJwtToken(),
+        },
+      }
+    );
+
+    toast.success("Order Placed Successfully");
+
+    localStorage.removeItem("cart");
+    setTimeout(() => {
+      window.location.href = "/user/orders";
+    }, 2000);
   };
 
   const PaymentDialog = ({ isPaymentOpen, onClose }) => {
+      if (!isPaymentOpen) return null;
+
+    return (
+      <div className="fixed top-0 left-0 w-full h-full bg-white flex justify-center z-60">
+        <div className="bg-white p-10 rounded-lg w-[400px]">
+          <h1 className="text-2xl">Complete Your Payment</h1>
+
+          <Button
+            label="Complete Payment"
+            onClick={() => {
+              toast.success("Payment Successful");
+              placeOrder();
+            }}
+            variant="primary"
+          />
+        </div>
+      </div>
+    );
   };
 
   return (

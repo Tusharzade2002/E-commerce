@@ -1,4 +1,5 @@
-
+import Order from "../Models/Orders.js";
+import Payment from '../Models/Payment.js'
 const postpayment = async(req,res)=>{
        
      const {orderId,amount,PaymentMode,status,transitionID}=req.body;
@@ -35,9 +36,23 @@ const postpayment = async(req,res)=>{
          status
       })
 
-     res.json({
-        sucess:true,
-        message:"payment completed successfully"
-     })
-}
+      try {
+    const savedPayment = await payment.save();
+
+    order.paymentId = savedPayment._id;
+    order.paymentMode = paymentMode;
+
+    order.timeline.push({ status: "Payment Completed", date: Date.now() });
+
+    await order.save();
+
+    return res.json({
+      success: true,
+      message: "Payment successful",
+      data: savedPayment,
+    });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+};
 export {postpayment}

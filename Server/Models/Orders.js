@@ -51,11 +51,11 @@ const orderschema = new Schema({
             status:{
                 type:String,
                 required:true
+            },
+            date:{
+                type:Date,
+                default:Date.now,
             }
-            // date:{
-            //     type:date,
-            //     default:Date.now,
-            // }
         }
      ]
 },{timestamps:true})

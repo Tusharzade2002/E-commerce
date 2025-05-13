@@ -1,5 +1,5 @@
 import Order from "../Models/Orders.js";
-const PostOrder = async (req, res) => {
+const PostOrder = async (req, res) => { 
   const { products, DelivaryAddress, phone, PaymentMode } = req.body;
 
   console.log(req.user.id);
@@ -71,16 +71,17 @@ const putOrder = async (req, res) => {
     });
   }
      //user can only cancel the order if it is not delivered
-  if (user.role !== "user") {
+  if (user.role == "user" && req.body.status == "cancelled") {
     if (order.status == "delivered") {
       return res.status(400).json({
-        message: false,
+        success: false,
         message: "order has already been delivered",
       });
+    }else{
+      order.status ="cancelled";
+      await order.save();
     }
-    if (req.body.status == "cancelled") {
-      order.status == "cancelled";
-    }
+   
   }
 
   if (req.body.phone) {
@@ -94,8 +95,9 @@ const putOrder = async (req, res) => {
   if (user.role == "admin") {
     order.status = req.body.status;
     order.timelines = req.body.timelines;
+    
   }
-  await order.save();
+ await order.save();
   const updateOrder = await Order.findById(id);
   return res.json({
     success: true,
@@ -129,6 +131,15 @@ const putOrder = async (req, res) => {
             
         })
     }
+    if(user._id != order.userId && user.role != "admin"){
+      return res.json({
+        success:false,
+        message:"You are not authorized to view this order",
+
+      })
+    }
   }
 };
-export { PostOrder, putOrder };
+const getOrdersByUserId = async (req, res) => {
+};
+export { PostOrder, putOrder , getOrdersByUserId};
