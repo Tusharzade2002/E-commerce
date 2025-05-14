@@ -3,7 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Button from "../Component/Button";
 import Input from "../Component/Input";
 import axios from "axios";
-import { getJwtToken} from "../Util/Common";
+import { GetjwtToken} from "../Util/Common";
 
 function Cart() {
   const [cart, setCart] = useState([]);
@@ -124,7 +124,7 @@ function Cart() {
       orderBody,
       {
         headers: {
-          Authorization: getJwtToken(),
+          Authorization: GetjwtToken(),
         },
       }
     );

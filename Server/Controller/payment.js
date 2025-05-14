@@ -39,10 +39,10 @@ const postpayment = async(req,res)=>{
       try {
     const savedPayment = await payment.save();
 
-    order.paymentId = savedPayment._id;
-    order.paymentMode = paymentMode;
+    order.PaymentID = savedPayment._id;
+    order.PaymentMode = PaymentMode;
 
-    order.timeline.push({ status: "Payment Completed", date: Date.now() });
+    order.timelines.push({ status: "Payment Completed", date: Date.now() });
 
     await order.save();
 
