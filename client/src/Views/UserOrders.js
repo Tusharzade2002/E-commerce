@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import OrderCard from "../Component/OrderCard";
-import { GetCurrentUser, getReadableTimestamp, api } from "../Util/Common.js";
+import { GetCurrentUser, getReadableTimestamp, GetjwtToken } from "../Util/Common.js";
+import axios from "axios";
 
 function UserOrders() {
   const [user, setUser] = useState({});
@@ -12,18 +13,25 @@ function UserOrders() {
     if (!user?.id) {
       return;
     }
-
+ console.log("user:",user);
+ 
     try {
-      const response = await api.get(`/orders/user/${user.id}`);
-
-      setOrders(response?.data?.data);
+      const response = await axios.get(`http://localhost:8000/orders/user/${user.id}`,{
+        headers:{
+          Authorization :GetjwtToken()
+        }
+      });
+      console.log(response.data); 
+      setOrders(response?.data);
     } catch (error) {
+      console.log(error);
+      
       toast.error(error?.response?.data);
     }
   };
 
   useEffect(() => {
-    const user = GetCurrentUser();
+    const user = GetCurrentUser()
 
     if (user) {
       setUser(user);
@@ -36,7 +44,7 @@ function UserOrders() {
   }, []);
 
   useEffect(() => {
-    if (user) {
+    if (user&& user.id) {
       loadUserOrders();
     }
   }, [user]);

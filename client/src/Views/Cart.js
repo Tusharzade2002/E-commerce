@@ -56,21 +56,27 @@ function Cart() {
         className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
         onClick={onClose}
       >
-        <div
+        <form
+         
           className="bg-white p-10 rounded-lg w-[400px]"
           onClick={(e) => e.stopPropagation()}
+         
         >
+          
           <h1>Checkout View</h1>
 
           <Input
             label="Name"
+            name="name"
             placeholder="Enter your name"
             val={name}
             onChange={(val) => setName(val)}
+        focus 
           />
-
+  
           <Input
             label="Address"
+            name="address"
             placeholder="Enter your address"
             val={address}
             onChange={(val) => setAddress(val)}
@@ -78,6 +84,7 @@ function Cart() {
 
           <Input
             label="Phone"
+            name="phone"
             placeholder="Enter your phone number"
             val={phone}
             onChange={(val) => setPhone(val)}
@@ -96,14 +103,15 @@ function Cart() {
           <div className="mt-10 flex justify-center">
             <Button
               label="Complete Order"
+              className="bg-blue-600"
               onClick={() => {
                 setIsCheckoutOpen(false);
                 setIsPaymentOpen(true);
               }}
-              variant="primary"
+              
             />
           </div>
-        </div>
+        </form>
       </div>
     );
   };

@@ -9,7 +9,7 @@ import {
 import Button from "./Button";
 import toast, { Toaster } from "react-hot-toast";
 function Productcard({
-  id,
+  _id,
   name,
   currentPrice,
   price,
@@ -51,7 +51,7 @@ function Productcard({
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
     const product = {
-      productId: id,
+      productId: _id,
       name: name,
       image: currentImage,
       quantity: quantity,
@@ -61,7 +61,7 @@ function Productcard({
     let exitingProductIndex = -1;
 
     cart.forEach((item, index) => {
-      if (item.productId === id) {
+      if (item.productId === _id) {
         exitingProductIndex = index;
       }
     });

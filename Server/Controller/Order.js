@@ -113,7 +113,8 @@ const putOrder = async (req, res) => {
 
    let order;
    try{
-    order =await Order.findById({_id:_id});
+                
+    order =await Order.findById(_id).populate("products.productId","-shortDescription -longDescription -images -category -__v").populate("PaymentID","-updatedAt -createdAt -__v")
     console.log(order)
     if(!order){
       return res.status(404).json({
@@ -127,15 +128,28 @@ const putOrder = async (req, res) => {
       })
     }
    }catch(err){
-    return res.status(400).json({success:false,message:err.message});
+    return res.status(400).json({success:false,message:"errroe"});
    }
 
-   if(user._id != order.userId && user.role!="admin"){
-    return res.status(401).json ({
-      success:true,
-      message:"Order fetched successfully",
-      data:order
-    })
-   }
+
  }
-export { PostOrder, putOrder ,getOrderById };
+
+const getOrdersByUserId = async (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+
+  if (user.role != "admin" && user._id != id) {
+    return res.status(401).json({
+         success:false,
+         message:"you are not awthorized to view this order"
+    });
+  }
+
+  const orders = await Order.find({ userId: id })
+    return res.json({
+      success:true,
+      message:"order fetched successfully",
+      data:orders
+    })
+};
+export { PostOrder, putOrder ,getOrderById,getOrdersByUserId };

@@ -11,9 +11,10 @@ app.use(cors());
 import {PostSignup,postLogin}  from './Controller/User.js';
 import { postProduct ,getProducts} from './Controller/Product.js';
 import {jwtVerifyMiddleware,CheckRoleMiddleware} from './MiddleWare/auth.js'
-import {PostOrder , putOrder ,getOrderById} from './Controller/Order.js';
+import {PostOrder , putOrder ,getOrderById,getOrdersByUserId} from './Controller/Order.js';
 import {postpayment} from './Controller/payment.js'
 
+mongoose.set('strictQuery', true);
 
 // connect to mongoDB
 const connectDB  =async()=>{
@@ -37,6 +38,7 @@ app.get("/products",getProducts)
 app.post("/order",jwtVerifyMiddleware,PostOrder)
 app.put("/order/:id",jwtVerifyMiddleware,putOrder);
 app.get("/order/:_id",jwtVerifyMiddleware,getOrderById);
+app.get("/orders/user/:id",jwtVerifyMiddleware,getOrdersByUserId)
 app.post("/payment",postpayment)
 // app.get("/test",(req,res)=>{
 //       const token =req.headers.authorization;
